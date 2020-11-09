@@ -9,5 +9,6 @@ pipeline_b:
     strategy: depend
 
 staging:
+  allow_failure: true
   trigger: 
     project: mall/foo
