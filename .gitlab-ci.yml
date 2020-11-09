@@ -1,8 +1,8 @@
-variables:
-  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-
-build:
-  before_script:
-    - export IMAGE_SHA=$IMAGE-$CI_COMMIT_SHORT_SHA
+job:
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - now
   script:
-    - echo docker built -t $IMAGE_SHA .
+    - date >> now
+    - cat now
