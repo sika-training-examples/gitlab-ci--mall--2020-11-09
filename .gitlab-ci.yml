@@ -59,4 +59,3 @@ deploy prod:
   environment:
     name: prod
     url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
-    on_stop: stop dev
