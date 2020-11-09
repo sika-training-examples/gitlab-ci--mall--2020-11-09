@@ -1,2 +1,7 @@
-first job:
+job1:
   script: echo Hello World!
+  
+job2:
+  script:
+    - echo Hello World!
+    - echo Ahoj Svete!
