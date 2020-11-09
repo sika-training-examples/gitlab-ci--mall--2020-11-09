@@ -18,6 +18,7 @@ def make_service(name):
         },
         "deploy %s" % name: {
             "stage": "deploy",
+            "needs": ["build %s" % name]
             "script":[
                 "echo Deploy %s" % name,
             ]
