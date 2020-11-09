@@ -5,6 +5,7 @@ stages:
   - deploy dev
   - test dev
   - deploy prod
+  - test prod
 
 variables:
   IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
@@ -53,9 +54,16 @@ deploy prod:
   <<: *deploy
   only:
     - master
+  when: manual
+  allow_failure: false
   stage: deploy prod
   variables:
     HOST: $CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   environment:
     name: prod
     url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+
+test prod:
+  stage: test prod
+  script:
+    - curl https://$CI_PROJECT_PATH_SLUG.$PROD_KUBE_INGRESS_BASE_DOMAIN
