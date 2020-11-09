@@ -17,4 +17,3 @@ pipeline_b:
 staging:
   trigger: 
     project: mall/foo
-    strategy: depend
