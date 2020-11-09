@@ -4,7 +4,7 @@ stages:
 
 build_A:
   stage: build
-  script: mkdir -p out && echo '<h1>Hello from Project A!</h1>' > out/index.html
+  script: mkdir -p out && echo '<h1>Hello from Project A!</h1>' > out/index.html && false
   artifacts:
     paths:
       - out
