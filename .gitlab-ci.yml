@@ -1,17 +1,8 @@
-before_script:
-  - echo Global before
-
-after_script:
-  - echo Global after
-
-job1:
-  script: echo Job1!
-
-job2:
-  script: echo Job2! && false
 
 job3:
-  before_script:
-    - echo Local before
-  after_script: []
-  script: echo Job3!
+  after_script: 
+    - echo after script clean up
+  script: 
+    - echo Job3!
+    - 'false'
+    - echo clean up
