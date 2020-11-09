@@ -1,4 +1,4 @@
-image: nodejs
+image: node
 
 job:
   cache:
