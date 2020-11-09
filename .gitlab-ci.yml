@@ -1,3 +1,5 @@
+image: ondrejsika/ci
+
 job:
   script: env | grep KUBE
 
