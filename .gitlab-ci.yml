@@ -10,4 +10,7 @@ job_dev:
 job_prod:
   environment:
     name: prod
-  script: env | grep KUBE
+    url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
+  script:
+    - helm repo add ondrejsika https://helm.oxs.cz
+    - helm upgrade --install hello ondrejsika/one-image --set host=$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
