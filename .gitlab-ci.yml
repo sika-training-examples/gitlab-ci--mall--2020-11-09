@@ -1,3 +1,16 @@
-test:
-  script: echo test ... && false
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: echo Build!
   allow_failure: true
+
+test1:
+  stage: test
+  script: echo Test1!
+
+test2:
+  stage: test
+  script: echo Test2!
