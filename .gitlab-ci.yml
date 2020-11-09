@@ -1,14 +1,19 @@
-pipeline_a:
-  trigger:
-    include: a/.gitlab-ci.yml
-    strategy: depend
+stages:
+  - generate
+  - pipeline
 
-pipeline_b:
-  trigger:
-    include: b/.gitlab-ci.yml
-    strategy: depend
+generate:
+  stage: generate
+  image: python:3.7
+  script: python generate-gitlab-ci.py
+  artifacts:
+    paths:
+      - .gitlab-ci.generated.yml
 
-staging:
-  allow_failure: true
-  trigger: 
-    project: mall/foo
+pipeline:
+  stage: pipeline
+  trigger:
+    include:
+      - artifact: .gitlab-ci.generated.yml
+        job: generate
+    strategy: depend
