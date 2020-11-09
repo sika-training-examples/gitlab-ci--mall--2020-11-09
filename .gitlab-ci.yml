@@ -2,17 +2,11 @@ pipeline_a:
   trigger:
     include: a/.gitlab-ci.yml
     strategy: depend
-  only:
-    changes:
-      - a/**
 
 pipeline_b:
   trigger:
     include: b/.gitlab-ci.yml
     strategy: depend
-  only:
-    changes:
-      - b/**
 
 staging:
   trigger: 
