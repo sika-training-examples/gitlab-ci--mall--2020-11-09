@@ -2,6 +2,12 @@ stages:
   - build
   - deploy
 
+variables:
+  XXX: foo bar
+
 include:
-  - ci/build.yml
-  - ci/deploy.yml
+  - project: 'mall/ci'
+    ref: master
+    file:
+      - '/build.yml'
+      - '/deploy.yml'
