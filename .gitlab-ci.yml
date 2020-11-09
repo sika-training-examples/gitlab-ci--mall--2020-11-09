@@ -29,6 +29,8 @@ deploy dev:
 
 stop dev:
   stage: deploy dev
+  variables:
+    GIT_STRATEGY: none
   script:
     - helm uninstall $CI_PROJECT_PATH_SLUG
   when: manual
