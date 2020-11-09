@@ -1,8 +1,16 @@
 
-job3:
-  script: 
-    - echo Job3!
-    - 'false'
-    - echo clean up
- after_script: 
-    - echo after script clean up
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: echo Build! && false
+
+test1:
+  stage: test
+  script: echo Test1!
+
+test2:
+  stage: test
+  script: echo Test2!
