@@ -1,8 +1,9 @@
+image: nodejs
+
 job:
   cache:
     key: $CI_COMMIT_REF_SLUG
     paths:
-      - now
+      - node_modules
   script:
-    - date >> now
-    - cat now
+    - yarn
