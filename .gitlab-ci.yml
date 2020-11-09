@@ -3,6 +3,7 @@ image: ondrejsika/ci
 stages:
   - build
   - deploy dev
+  - test dev
   - deploy prod
 
 variables:
@@ -37,3 +38,10 @@ stop dev:
   environment:
     name: dev/$CI_COMMIT_REF_SLUG
     action: stop
+
+test dev:
+  stage: test dev
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+  script:
+    - curl https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
