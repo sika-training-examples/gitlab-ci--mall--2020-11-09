@@ -1,10 +1,6 @@
 variables:
-  MALL_GLOBAL: global
+  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
-job1:
-  script: env | grep MALL
-
-job2:
-  variables:
-    MALL_LOCAL: local
-  script: env | grep MALL
+build:
+  script:
+    - echo docker built -t $IMAGE .
