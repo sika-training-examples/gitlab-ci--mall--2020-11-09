@@ -1,8 +1,10 @@
-test:
-  when: manual
-  script: echo test ... && false
-
-test2:
-  when: manual
-  script: echo test ... && false
-  allow_failure: false
+nightly:
+  script: echo Nightly build
+  only:
+    - schedules
+  
+push:
+  script: echo Every push
+  only:
+    - pushes
+    
