@@ -1,15 +1,32 @@
 image: ondrejsika/ci
 
-job:
-  script: env | grep KUBE
+stages:
+  - deploy dev
+  - deploy prod
 
-job_dev:
+deploy dev:
+  stage: deploy dev
   environment:
-    name: dev/foo
-  script: env | grep KUBE
+    name: dev/$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
+  script:
+    - helm repo add ondrejsika https://helm.oxs.cz
+    - helm upgrade --install hello ondrejsika/one-image --set host=$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
 
+stop dev:
+  when: manual
+  stage: deploy dev
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - helm uninstall hello
 
-job_prod:
+deploy prod:
+  only:
+    - master
+  stage: deploy prod
   environment:
     name: prod
     url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
