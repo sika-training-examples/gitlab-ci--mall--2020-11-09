@@ -13,3 +13,6 @@ pipeline_b:
   only:
     changes:
       - b/**
+
+staging:
+  trigger: mall/foo
