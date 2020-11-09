@@ -1,31 +1,7 @@
 stages:
-  - deploy dev
-  - deploy prod
+  - build
+  - deploy
 
-deploy dev:
-  stage: deploy dev
-  script:
-    - env | grep XXX
-  environment:
-    name: dev/$CI_COMMIT_REF_SLUG
-    url: https://$CI_COMMIT_REF_SLUG.dev.company.com
-    on_stop: stop dev
-
-stop dev:
-  variables:
-    GIT_STRATEGY: none
-  stage: deploy dev
-  script: echo helm unintall ...
-  when: manual
-  environment:
-    name: dev/$CI_COMMIT_REF_SLUG
-    action: stop
-
-deploy prod:
-  when: manual
-  stage: deploy prod
-  script:
-    - env | grep XXX
-  environment:
-    name: prod
-    url: https://prod.company.com
+include:
+  - ci/build.yml
+  - ci/deploy.yml
