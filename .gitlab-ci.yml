@@ -1,11 +1,23 @@
-Build A:
-  script: echo Cuild A ...
-  only:
-    changes:
-      - a/**
+stages:
+  - build
+  - test
+  - deploy
 
-Build B:
-  script: echo Cuild B ...
+build:
+  stage: build
+  script: echo build
   only:
-    changes:
-      - b/**
+    - branches
+    - merge_request
+
+test:
+  stage: test
+  script: echo test
+  only:
+    - merge_request
+
+deploy:
+  stage: deploy
+  script: echo deploy
+  only:
+    - master
