@@ -3,6 +3,6 @@ variables:
 
 build:
   before_script:
-    - export IMAGE_SHA=$$IMAGE-$CI_COMMIT_SHORT_SHA
+    - export IMAGE_SHA=$IMAGE-$CI_COMMIT_SHORT_SHA
   script:
     - echo docker built -t $IMAGE_SHA .
