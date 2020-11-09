@@ -12,3 +12,7 @@ include:
   - project: 'mall/ci'
     ref: master
     file: '/deploy.yml'
+
+build:
+  stage: build
+  script: echo awesome build $XXX
