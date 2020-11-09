@@ -14,3 +14,24 @@ build:
     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - docker build -t $IMAGE .
     - docker push $IMAGE
+
+deploy dev:
+  stage: deploy dev
+  script:
+    - helm repo add https://helm.oxs.cz
+    - helm upgrade --install $CI_PROJECT_PATH_SLUG ondrejsika/one-image
+      --set image=$IMAGE
+      --set host=$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    on_stop: stop dev
+
+stop dev:
+  stage: deploy dev
+  script:
+    - helm uninstall $CI_PROJECT_PATH_SLUG
+  when: manual
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    action: stop
