@@ -18,7 +18,7 @@ build:
 deploy dev:
   stage: deploy dev
   script:
-    - helm repo add https://helm.oxs.cz
+    - helm repo add ondrejsika https://helm.oxs.cz
     - helm upgrade --install $CI_PROJECT_PATH_SLUG ondrejsika/one-image
       --set image=$IMAGE
       --set host=$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
