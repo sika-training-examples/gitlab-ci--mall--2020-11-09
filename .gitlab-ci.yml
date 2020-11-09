@@ -2,16 +2,18 @@
 stages:
   - build
   - test
+  - deploy
 
 build:
   stage: build
-  script: echo Build! && false
+  script: echo Build!
 
 test1:
   stage: test
   script: echo Test1!
   when: always
 
-test2:
-  stage: test
-  script: echo Test2!
+deploy:
+  stage: deploy
+  script: echo Deploy!
+  when: manual
