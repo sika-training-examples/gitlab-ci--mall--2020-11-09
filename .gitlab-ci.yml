@@ -10,6 +10,7 @@ build:
 test1:
   stage: test
   script: echo Test1!
+  when: always
 
 test2:
   stage: test
