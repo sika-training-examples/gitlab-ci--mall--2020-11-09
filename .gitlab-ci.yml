@@ -9,6 +9,13 @@ stages:
 variables:
   IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
 
+.deploy: &deploy
+  script:
+    - helm repo add ondrejsika https://helm.oxs.cz
+    - helm upgrade --install $CI_PROJECT_PATH_SLUG ondrejsika/one-image
+      --set image=$IMAGE
+      --set host=$HOST
+
 build:
   stage: build
   script:
@@ -17,12 +24,10 @@ build:
     - docker push $IMAGE
 
 deploy dev:
+  <<: *deploy
   stage: deploy dev
-  script:
-    - helm repo add ondrejsika https://helm.oxs.cz
-    - helm upgrade --install $CI_PROJECT_PATH_SLUG ondrejsika/one-image
-      --set image=$IMAGE
-      --set host=$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+  variables:
+    HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   environment:
     name: dev/$CI_COMMIT_REF_SLUG
     url: https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
@@ -41,7 +46,17 @@ stop dev:
 
 test dev:
   stage: test dev
-  environment:
-    name: dev/$CI_COMMIT_REF_SLUG
   script:
-    - curl https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    - curl https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$DEV_KUBE_INGRESS_BASE_DOMAIN
+
+deploy prod:
+  <<: *deploy
+  only:
+    - master
+  stage: deploy prod
+  variables:
+    HOST: $CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+  environment:
+    name: prod
+    url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    on_stop: stop dev
