@@ -1,0 +1,23 @@
+{
+  "name": "vercel.cz",
+  "version": "0.0.0",
+  "repository": "git@github.com:ondrejsika/vercel.cz.git",
+  "author": "Ondrej Sika <ondrej@ondrejsika.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prettier-check": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "dev": "next",
+    "build": "next build",
+    "export": "next export",
+    "static": "yarn run build && yarn run export"
+  },
+  "dependencies": {
+    "next": "^9.5.3",
+    "prettier": "^2.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-player": "^2.6.2"
+  }
+}
