@@ -1,16 +1,8 @@
-stages:
-  - build
-  - test
-
-build:
-  stage: build
-  script: echo Build! && false
-  allow_failure: true
-
-test1:
-  stage: test
-  script: echo Test1!
+test:
+  when: manual
+  script: echo test ... && false
 
 test2:
-  stage: test
-  script: echo Test2!
+  when: manual
+  script: echo test ... && false
+  allow_failure: false
