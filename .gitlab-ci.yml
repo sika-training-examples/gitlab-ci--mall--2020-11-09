@@ -4,7 +4,7 @@ stages:
 
 build:
   stage: build
-  script: echo Build!
+  script: echo Build! && false
   allow_failure: true
 
 test1:
