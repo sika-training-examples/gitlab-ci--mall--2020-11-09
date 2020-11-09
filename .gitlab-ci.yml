@@ -1,7 +1,6 @@
-test:
-  image: ondrejsika/pytest
+image: ondrejsika/ci
+
+
+deploy:
   script:
-    - pytest --junitxml=report.xml
-  artifacts:
-    reports:
-      junit: report.xml
+    - kubectl version
