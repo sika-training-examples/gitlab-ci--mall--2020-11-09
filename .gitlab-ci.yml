@@ -1,8 +1,8 @@
 
 job3:
-  after_script: 
-    - echo after script clean up
   script: 
     - echo Job3!
     - 'false'
     - echo clean up
+ after_script: 
+    - echo after script clean up
