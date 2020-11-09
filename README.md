@@ -1,4 +1,2 @@
 # Ondrejsika
 
-foo
-bar
