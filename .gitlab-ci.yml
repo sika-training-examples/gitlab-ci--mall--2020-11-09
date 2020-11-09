@@ -1,20 +1,10 @@
-stages:
-  - build
-  - test
-  - deploy
+variables:
+  MALL_GLOBAL: global
 
-build:
-  stage: build
-  script: echo build
+job1:
+  script: env | grep MALL
 
-test:
-  stage: test
-  script: echo test
-  only:
-    - merge_request
-
-deploy:
-  stage: deploy
-  script: echo deploy
-  only:
-    - master
+job2:
+  variables:
+    MALL_LOCAL: local
+  script: env | grep MALL
