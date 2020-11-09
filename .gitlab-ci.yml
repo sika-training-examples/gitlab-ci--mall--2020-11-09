@@ -1,13 +1,15 @@
-stages:
-  - build
-  - deploy
+pipeline_a:
+  trigger:
+    include: a/.gitlab-ci.yml
+    strategy: depend
+  only:
+    changes:
+      - a/**
 
-variables:
-  XXX: foo bar
-
-include:
-  - project: 'mall/ci'
-    ref: master
-    file:
-      - '/build.yml'
-      - '/deploy.yml'
+pipeline_b:
+  trigger:
+    include: b/.gitlab-ci.yml
+    strategy: depend
+  only:
+    changes:
+      - b/**
