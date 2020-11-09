@@ -6,15 +6,10 @@ stages:
 build:
   stage: build
   script: echo build
-  only:
-    - branches
-    - merge_request
 
 test:
   stage: test
   script: echo test
-  only:
-    - merge_request
 
 deploy:
   stage: deploy
