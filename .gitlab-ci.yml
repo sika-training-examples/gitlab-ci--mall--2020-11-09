@@ -12,8 +12,10 @@ deploy dev:
     on_stop: stop dev
 
 stop dev:
+  variables:
+    GIT_STRATEGY: none
   stage: deploy dev
-  script: echo Stop!
+  script: echo helm unintall ...
   when: manual
   environment:
     name: dev/$CI_COMMIT_REF_SLUG
