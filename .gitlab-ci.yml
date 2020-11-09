@@ -8,6 +8,7 @@ variables:
 include:
   - project: 'mall/ci'
     ref: master
-    file:
-      - '/build.yml'
-      - '/deploy.yml'
+    file: '/build.yml'
+  - project: 'mall/ci'
+    ref: master
+    file: '/deploy.yml'
