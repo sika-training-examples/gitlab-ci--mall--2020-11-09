@@ -1,7 +1,17 @@
-image: node
+stages:
+  - build
+  - test
 
-job:
-  variables:
-    GIT_CLEAN_FLAGS: -ffdx -e node_modules
+build:
+  stage: build
   script:
-    - yarn
+    - mkdir -p out
+    - echo '<h1>Hello World!</h1>' > out/index.html
+  artifacts:
+    paths:
+      - out
+
+test:
+  stage: test
+  script:
+    - cat out/index.html
