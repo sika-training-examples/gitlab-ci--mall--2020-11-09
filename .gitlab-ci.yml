@@ -1,10 +1,11 @@
-nightly:
-  script: echo Nightly build
+Build A:
+  script: echo Cuild A ...
   only:
-    - schedules
-  
-push:
-  script: echo Every push
+    changes:
+      - a/**
+
+Build B:
+  script: echo Cuild B ...
   only:
-    - pushes
-    
+    changes:
+      - b/**
