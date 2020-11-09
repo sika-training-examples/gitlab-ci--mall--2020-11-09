@@ -10,6 +10,8 @@ build:
 test:
   stage: test
   script: echo test
+  only:
+    - merge_request
 
 deploy:
   stage: deploy
